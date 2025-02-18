@@ -12,17 +12,26 @@ const NavBar = () => {
   //
   // Destructure the object returned by the useContext hook for easy access
   // to the data we added to the context with familiar names.
-  const { user } = useContext(UserContext)
+  const { user, setUser } = useContext(UserContext)
+
+  function handleSignOut(){
+    // destroy the token! 
+    localStorage.removeItem('token')
+    // clearing out our state
+    setUser(null)
+  }
 
   return (
     <nav>
       {user ? (
         <ul>
           <li>Welcome, {user.username}</li>
+          <li><Link to='/' onClick={handleSignOut}>Sign Out</Link></li>
         </ul>
       ) : (
         <ul>
           <li><Link to='/sign-up'>Sign up</Link></li>
+          <li><Link to='/sign-in'>Sign in</Link></li>
         </ul>
 
       )}
