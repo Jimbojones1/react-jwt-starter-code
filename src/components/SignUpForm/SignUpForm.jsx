@@ -1,13 +1,22 @@
 // SignUpForm.jsx
 
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router';
+
+// The context is how you can access the global
+// state 
+import { UserContext } from '../../contexts/UserContext';
 
 import { signUp } from '../../services/authService';
 
 const SignUpForm = () => {
     // navigate is a function that takes in a path 
     // we defined on one of our routes
+
+    // consume the context! 
+    // here we can destructure setUser, or user state
+    const {setUser} = useContext(UserContext)
+
     const navigate = useNavigate();
     const [message, setMessage] = useState('');
     const [formData, setFormData] = useState({
@@ -30,6 +39,8 @@ const SignUpForm = () => {
         try {
             // signUp is from our authService
             const newUser = await signUp(formData)
+            // updating the UserContext user state!
+            setUser(newUser)
             console.log(newUser, " <- new User (decoded jwt token)")
         } catch (err) {
             console.log(err)
