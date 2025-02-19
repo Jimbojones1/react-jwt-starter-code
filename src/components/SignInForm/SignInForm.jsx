@@ -9,7 +9,9 @@ import { UserContext } from '../../contexts/UserContext';
 
 const SignInForm = () => {
   const navigate = useNavigate();
+
   const { setUser } = useContext(UserContext);
+
   const [message, setMessage] = useState('');
   const [formData, setFormData] = useState({
     username: '',

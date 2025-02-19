@@ -25,7 +25,9 @@ const signUp = async (formData) => {
     }
 
     if (data.token) {
+      // set the token in local storage
       localStorage.setItem('token', data.token);
+      // decoding the token and returning it from the function!
       return JSON.parse(atob(data.token.split('.')[1])).payload;
     }
 
