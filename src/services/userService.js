@@ -20,4 +20,5 @@ const index = async () => {
       throw new Error(err);
     }
   };
-  
+ 
+  export { index }
